@@ -22,10 +22,12 @@ class VPNClient {
         this.mtuElement = document.getElementById('mtu');
         this.portElement = document.getElementById('port');
         this.networkElement = document.getElementById('network');
+        this.countrySelect = document.getElementById('countrySelect');
 
         // Event Listeners
         this.connectBtn.addEventListener('click', () => this.connect());
         this.disconnectBtn.addEventListener('click', () => this.disconnect());
+        this.countrySelect.addEventListener('change', () => this.handleCountryChange());
     }
 
     async connect() {
@@ -76,6 +78,10 @@ class VPNClient {
             this.mtuElement.textContent = status.fingerprint.mtu;
             this.portElement.textContent = status.port;
             this.networkElement.textContent = status.routing_table.vpn_network;
+
+            if (status.current_node) {
+                this.countrySelect.value = status.current_node.country;
+            }
         } catch (error) {
             console.error('Error updating status:', error);
         }
@@ -130,78 +136,121 @@ class VPNClient {
         this.statusArea.appendChild(logEntry);
         this.statusArea.scrollTop = this.statusArea.scrollHeight;
     }
+
+    handleCountryChange() {
+        if (this.isConnected) {
+            // If connected, disconnect first
+            this.disconnect();
+        }
+    }
 }
 
 // Initialize the VPN client when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    const connectBtn = document.getElementById('connectBtn');
-    const disconnectBtn = document.getElementById('disconnectBtn');
-    const statusIndicator = document.getElementById('statusIndicator');
+document.addEventListener('DOMContentLoaded', function() {
+    const connectButton = document.getElementById('connectButton');
     const statusText = document.getElementById('statusText');
-    const mtuElement = document.getElementById('mtu');
-    const portElement = document.getElementById('port');
-    const networkElement = document.getElementById('network');
-
+    const countrySelect = document.getElementById('countrySelect');
     let isConnected = false;
 
-    async function updateStatus() {
-        try {
-            const response = await fetch('/status');
-            const status = await response.json();
-            
-            isConnected = status.running;
-            statusIndicator.classList.toggle('connected', isConnected);
-            statusText.textContent = isConnected ? 'Connected' : 'Disconnected';
-            
-            connectBtn.disabled = isConnected;
-            disconnectBtn.disabled = !isConnected;
+    // Populate country select with available servers
+    function populateCountrySelect() {
+        fetch('http://localhost:8000', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ action: 'status' })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.servers) {
+                countrySelect.innerHTML = '';
+                data.servers.forEach(server => {
+                    const option = document.createElement('option');
+                    option.value = server.country;
+                    option.textContent = server.country;
+                    countrySelect.appendChild(option);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching servers:', error);
+        });
+    }
 
-            // Update connection info
-            mtuElement.textContent = status.fingerprint.mtu;
-            portElement.textContent = status.port;
-            networkElement.textContent = status.routing_table.vpn_network;
-        } catch (error) {
+    // Update status periodically
+    function updateStatus() {
+        fetch('http://localhost:8000', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ action: 'status' })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const status = data.status;
+                isConnected = status.running;
+                statusText.textContent = isConnected ? 'Connected' : 'Disconnected';
+                connectButton.textContent = isConnected ? 'Disconnect' : 'Connect';
+                connectButton.className = isConnected ? 'btn btn-danger' : 'btn btn-success';
+                
+                if (status.current_node) {
+                    countrySelect.value = status.current_node.country;
+                }
+            } else {
+                statusText.textContent = 'Error';
+                console.error('Status error:', data.error);
+            }
+        })
+        .catch(error => {
             console.error('Error updating status:', error);
-        }
+            statusText.textContent = 'Error';
+        });
     }
-
-    async function connect() {
-        try {
-            const response = await fetch('/connect', { method: 'POST' });
-            const success = await response.json();
-            
-            if (success) {
-                await updateStatus();
-            } else {
-                alert('Failed to connect to VPN');
-            }
-        } catch (error) {
-            console.error('Error connecting:', error);
-            alert('Error connecting to VPN');
-        }
-    }
-
-    async function disconnect() {
-        try {
-            const response = await fetch('/disconnect', { method: 'POST' });
-            const success = await response.json();
-            
-            if (success) {
-                await updateStatus();
-            } else {
-                alert('Failed to disconnect from VPN');
-            }
-        } catch (error) {
-            console.error('Error disconnecting:', error);
-            alert('Error disconnecting from VPN');
-        }
-    }
-
-    connectBtn.addEventListener('click', connect);
-    disconnectBtn.addEventListener('click', disconnect);
 
     // Update status every 5 seconds
     setInterval(updateStatus, 5000);
-    // Initial status update
-    updateStatus();
+    updateStatus(); // Initial status check
+    populateCountrySelect(); // Populate country select
+
+    connectButton.addEventListener('click', function() {
+        const action = isConnected ? 'disconnect' : 'connect';
+        const selectedCountry = countrySelect.value;
+        
+        fetch('http://localhost:8000', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                action: action,
+                country: selectedCountry
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                isConnected = action === 'connect';
+                statusText.textContent = isConnected ? 'Connected' : 'Disconnected';
+                connectButton.textContent = isConnected ? 'Disconnect' : 'Connect';
+                connectButton.className = isConnected ? 'btn btn-danger' : 'btn btn-success';
+            } else {
+                statusText.textContent = 'Connection failed';
+                console.error('Connection error:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            statusText.textContent = 'Error';
+        });
+    });
+
+    countrySelect.addEventListener('change', function() {
+        if (isConnected) {
+            // If connected, disconnect first
+            connectButton.click();
+        }
+    });
 }); 
