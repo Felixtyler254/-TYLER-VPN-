@@ -1,0 +1,105 @@
+([('VPN_Client.exe',
+   'C:\\Users\\HP\\New '
+   'folder\\-TYLER-VPN-\\src\\build\\VPN_Client\\VPN_Client.exe',
+   'EXECUTABLE'),
+  ('python313.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\python313.dll',
+   'BINARY'),
+  ('unicodedata.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\unicodedata.pyd',
+   'EXTENSION'),
+  ('_decimal.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\_decimal.pyd',
+   'EXTENSION'),
+  ('_hashlib.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\_hashlib.pyd',
+   'EXTENSION'),
+  ('select.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\select.pyd',
+   'EXTENSION'),
+  ('_socket.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\_socket.pyd',
+   'EXTENSION'),
+  ('_lzma.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\_lzma.pyd',
+   'EXTENSION'),
+  ('_bz2.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\_bz2.pyd',
+   'EXTENSION'),
+  ('_queue.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\_queue.pyd',
+   'EXTENSION'),
+  ('_ssl.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\_ssl.pyd',
+   'EXTENSION'),
+  ('charset_normalizer\\md__mypyc.cp313-win_amd64.pyd',
+   'C:\\Users\\HP\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\charset_normalizer\\md__mypyc.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('charset_normalizer\\md.cp313-win_amd64.pyd',
+   'C:\\Users\\HP\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\charset_normalizer\\md.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('_ctypes.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\_ctypes.pyd',
+   'EXTENSION'),
+  ('_wmi.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\_wmi.pyd',
+   'EXTENSION'),
+  ('psutil\\_psutil_windows.pyd',
+   'C:\\Users\\HP\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\psutil\\_psutil_windows.pyd',
+   'EXTENSION'),
+  ('VCRUNTIME140.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\VCRUNTIME140.dll',
+   'BINARY'),
+  ('libcrypto-3.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\libcrypto-3.dll',
+   'BINARY'),
+  ('libssl-3.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\libssl-3.dll',
+   'BINARY'),
+  ('libffi-8.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\DLLs\\libffi-8.dll',
+   'BINARY'),
+  ('VCRUNTIME140_1.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\VCRUNTIME140_1.dll',
+   'BINARY'),
+  ('python3.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.752.0_x64__qbz5n2kfra8p0\\python3.dll',
+   'BINARY'),
+  ('app.js', 'C:\\Users\\HP\\New folder\\-TYLER-VPN-\\src\\app.js', 'DATA'),
+  ('index.html',
+   'C:\\Users\\HP\\New folder\\-TYLER-VPN-\\src\\index.html',
+   'DATA'),
+  ('styles.css',
+   'C:\\Users\\HP\\New folder\\-TYLER-VPN-\\src\\styles.css',
+   'DATA'),
+  ('vpn_handler.py',
+   'C:\\Users\\HP\\New folder\\-TYLER-VPN-\\src\\vpn_handler.py',
+   'DATA'),
+  ('certifi\\cacert.pem',
+   'C:\\Users\\HP\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\certifi\\cacert.pem',
+   'DATA'),
+  ('certifi\\py.typed',
+   'C:\\Users\\HP\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python313\\site-packages\\certifi\\py.typed',
+   'DATA'),
+  ('base_library.zip',
+   'C:\\Users\\HP\\New '
+   'folder\\-TYLER-VPN-\\src\\build\\VPN_Client\\base_library.zip',
+   'DATA')],)

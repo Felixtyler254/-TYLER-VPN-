@@ -1,25 +1,34 @@
- import java.io.*;
+import java.io.*;
 import java.net.*;
+import java.util.Scanner;
+import java.util.Random;
 
 public class client {
+    private static final String SERVER_HOST = "127.0.0.1";
+    private static final int SERVER_PORT = 5555;
+    private static final Random random = new Random();
+
     public static void main(String[] args) {
-        try (Socket socket = new Socket("127.0.0.1", 5555)) {
-            System.out.println("Connected to VPN server");
+        // Launch the GUI version instead of the console version
+        VPNGUI.main(args);
+    }
 
-            OutputStream output = socket.getOutputStream();
-            InputStream input = socket.getInputStream();
+    // Helper method to generate traffic data
+    public static String generateTrafficData(String destination) {
+        int packetSize = random.nextInt(1000) + 100; // Random packet size between 100-1100 bytes
+        int protocol = random.nextInt(2); // 0 for TCP, 1 for UDP
+        String protocolName = protocol == 0 ? "TCP" : "UDP";
+        
+        return destination + "|" + protocolName + "|" + packetSize;
+    }
 
-            String message = "Hello from Client!";
-            output.write(message.getBytes());
-            output.flush();
-
-            byte[] buffer = new byte[1024];
-            int bytesRead = input.read(buffer);
-
-            System.out.println("Server response: " + new String(buffer, 0, bytesRead));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    // Helper method to send traffic data
+    public static void sendTrafficData(DataOutputStream output, String destination) throws Exception {
+        String trafficData = generateTrafficData(destination);
+        String encryptedMessage = EncryptionHelper.encrypt(trafficData);
+        output.writeInt(encryptedMessage.getBytes().length);
+        output.write(encryptedMessage.getBytes());
+        output.flush();
     }
 }
 
